@@ -2,11 +2,9 @@
   <div
     class="task-item"
     :class="{ 'task-item--expanded': opened, 'task-item--editing': editing }"
+    @click="toggleExpanded"
   >
-    <div
-      class="task-item__main-content"
-      @click="toggleExpanded"
-    >
+    <div class="task-item__main-content">
       <span
         class="task-item__checkbox"
         :class="{ 'task-item__checkbox--active': task.completed }"
@@ -39,20 +37,20 @@
       <button
         v-if="editing"
         class="task-item__btn"
-        @click="save"
+        @click.prevent="save"
       >
         Сохранить
       </button>
       <button
         v-else
         class="task-item__btn"
-        @click="edit"
+        @click.prevent="edit"
       >
         Редактировать
       </button>
       <button
         class="task-item__btn"
-        @click="remove"
+        @click.prevent="remove"
       >
         Удалить
       </button>
@@ -150,7 +148,7 @@ export default {
 .task-item {
   display: grid;
   gap: 15px;
-  margin: 5px 0;
+  margin-bottom: 20px;
   padding: 15px 20px;
   background: #ffffff;
   border: 1px solid var(--light-color);
@@ -160,7 +158,7 @@ export default {
 .task-item__main-content {
   display: grid;
   grid-template-columns: auto 1fr;
-  align-items: center;
+  align-items: start;
   gap: 20px;
 }
 
@@ -171,6 +169,7 @@ export default {
 }
 
 .task-item__name {
+  margin-top: 4px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -211,6 +210,7 @@ export default {
   color: var(--primary-color);
   border: 1px solid var(--light-color);
   border-radius: 8px;
+  transition: border-color 0.25s ease-in-out;
 
   &--active {
     border-color: var(--primary-color);
@@ -234,6 +234,17 @@ export default {
   gap: 10px;
   padding-top: 15px;
   border-top: 1px solid var(--light-color);
+  animation: fade 0.5s ease-in-out;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .task-item__btn {

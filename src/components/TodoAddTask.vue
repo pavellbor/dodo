@@ -1,64 +1,68 @@
 <template>
   <section class="add-task">
-    <button
-      v-show="!opened"
-      class="add-task__show-btn"
-      @click="openForm"
-    >
-      <i class="bi bi-plus"></i>
-    </button>
-    <form
-      v-show="opened"
-      class="add-task__form"
-      @submit.prevent="add"
-    >
+    <transition name="fade">
       <button
-        class="add-task__close-btn"
-        type="button"
-        @click="closeForm"
+        v-show="!opened"
+        class="add-task__show-btn"
+        @click="openForm"
       >
-        <i class="bi bi-x"></i>
+        <i class="bi bi-plus"></i>
       </button>
-      <div class="add-task__field">
-        <input
-          ref="nameInput"
-          v-model="name"
-          class="add-task__name-input"
-          type="text"
-          placeholder="Название задачи"
-          required
-        />
-      </div>
-      <details class="add-task__details">
-        <summary class="add-task__details-summary">Подробнее</summary>
-        <div class="add-task__details-dropdown">
-          <div class="add-task__field">
-            <textarea
-              v-model="description"
-              placeholder="Комментарий"
-              rows="3"
-            />
-          </div>
-          <div class="add-task__field">
-            <span class="add-task__label">Начало</span>
-            <input
-              v-model="start"
-              type="time"
-            />
-          </div>
-          <div class="add-task__field">
-            <span class="add-task__label">Окончание</span>
-            <input
-              v-model="end"
-              type="time"
-            />
-          </div>
+    </transition>
+    <transition name="fade">
+      <form
+        v-show="opened"
+        class="add-task__form"
+        @submit.prevent="add"
+      >
+        <button
+          class="add-task__close-btn"
+          type="button"
+          @click="closeForm"
+        >
+          <i class="bi bi-x"></i>
+        </button>
+        <div class="add-task__field">
+          <input
+            ref="nameInput"
+            v-model="name"
+            class="add-task__name-input"
+            type="text"
+            placeholder="Название задачи"
+            required
+          />
         </div>
-      </details>
-      <div class="add-task__footer">
-        <button class="add-task__submit-btn">Добавить</button>
-      </div>
-    </form>
+        <details class="add-task__details">
+          <summary class="add-task__details-summary">Подробнее</summary>
+          <div class="add-task__details-dropdown">
+            <div class="add-task__field">
+              <textarea
+                v-model="description"
+                placeholder="Комментарий"
+                rows="3"
+              />
+            </div>
+            <div class="add-task__field">
+              <span class="add-task__label">Начало</span>
+              <input
+                v-model="start"
+                type="time"
+              />
+            </div>
+            <div class="add-task__field">
+              <span class="add-task__label">Окончание</span>
+              <input
+                v-model="end"
+                type="time"
+              />
+            </div>
+          </div>
+        </details>
+        <div class="add-task__footer">
+          <button class="add-task__submit-btn">Добавить</button>
+        </div>
+      </form>
+    </transition>
   </section>
 </template>
 
@@ -134,6 +138,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.add-task {
+  position: relative;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 .add-task__show-btn {
   height: 50px;
   font-size: 24px;

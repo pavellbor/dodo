@@ -104,6 +104,7 @@ export default {
   color: var(--light-color);
   border: 1px solid var(--light-color);
   border-radius: 8px;
+  transition: color 0.25s ease-in-out;
 
   &--active {
     color: var(--primary-color);

@@ -4,28 +4,30 @@
     :date="date"
     @change="changeDate"
   />
-  <Container @drop="onDrop">
-    <Draggable
-      v-for="task in filteredTaskList"
-      :key="task.id"
-    >
-      <todo-task-item
-        :task="task"
-        :opened="openTaskItemId === task.id"
-        @change="updateTask"
-        @remove="removeTask"
-        @open="openTaskItem(task.id)"
-        @close="closeTaskItem"
-      />
-    </Draggable>
-  </Container>
-  <todo-add-task
-    :opened="addTaskFormOpened"
-    :date="date"
-    @add="addTask"
-    @open="openAddTaskForm"
-    @close="closeAddTaskForm"
-  />
+  <todo-task-list>
+    <Container @drop="onDrop">
+      <Draggable
+        v-for="task in filteredTaskList"
+        :key="task.id"
+      >
+        <todo-task-item
+          :task="task"
+          :opened="openTaskItemId === task.id"
+          @change="updateTask"
+          @remove="removeTask"
+          @open="openTaskItem(task.id)"
+          @close="closeTaskItem"
+        />
+      </Draggable>
+    </Container>
+    <todo-add-task
+      :opened="addTaskFormOpened"
+      :date="date"
+      @add="addTask"
+      @open="openAddTaskForm"
+      @close="closeAddTaskForm"
+    />
+  </todo-task-list>
 </template>
 
 <script>
@@ -37,6 +39,7 @@ import TodoTaskItem from './components/TodoTaskItem.vue';
 import TodoLogo from './components/TodoLogo.vue';
 
 import { Container, Draggable } from 'vue-dndrop';
+import TodoTaskList from './components/TodoTaskList.vue';
 
 // import mocks from './mocks/tasks';
 
@@ -48,6 +51,7 @@ export default {
     TodoLogo,
     Container,
     Draggable,
+    TodoTaskList,
   },
 
   data() {
