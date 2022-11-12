@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "patch-package",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -10,7 +11,8 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "normalize.css": "^8.0.1",
-    "vue": "^3.2.13"
+    "vue": "^3.2.13",
+    "vue-dndrop": "^1.2.13"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -20,6 +22,7 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "patch-package": "^6.5.0",
     "sass": "^1.56.0",
     "sass-loader": "^13.1.0"
   },

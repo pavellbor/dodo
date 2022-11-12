@@ -150,7 +150,9 @@ export default {
 .task-item {
   display: grid;
   gap: 15px;
+  margin: 5px 0;
   padding: 15px 20px;
+  background: #ffffff;
   border: 1px solid var(--light-color);
   border-radius: 8px;
 }
@@ -220,11 +222,11 @@ export default {
   font-size: 24px;
   color: var(--primary-color);
   transform: translateY(1px);
-  visibility: hidden;
+  display: none;
 }
 
 .task-item__checkbox--active .bi-check {
-  visibility: visible;
+  display: block;
 }
 
 .task-item__dropdown {
