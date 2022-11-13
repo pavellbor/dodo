@@ -1,11 +1,18 @@
 <template>
-  <todo-logo />
+  <todo-header
+    :filterOpened="calendarOpened"
+    @toggleFilter="toggleFilter"
+  />
   <todo-calendar-filter
+    :opened="calendarOpened"
     :date="date"
     @change="changeDate"
   />
   <todo-task-list>
-    <Container @drop="onDrop">
+    <Container
+      v-if="filteredTaskList.length"
+      @drop="onDrop"
+    >
       <Draggable
         v-for="task in filteredTaskList"
         :key="task.id"
@@ -36,7 +43,7 @@ import API from './api/api';
 import TodoAddTask from './components/TodoAddTask.vue';
 import TodoCalendarFilter from './components/TodoCalendarFilter.vue';
 import TodoTaskItem from './components/TodoTaskItem.vue';
-import TodoLogo from './components/TodoLogo.vue';
+import TodoHeader from './components/TodoHeader.vue';
 
 import { Container, Draggable } from 'vue-dndrop';
 import TodoTaskList from './components/TodoTaskList.vue';
@@ -48,7 +55,7 @@ export default {
     TodoAddTask,
     TodoTaskItem,
     TodoCalendarFilter,
-    TodoLogo,
+    TodoHeader,
     Container,
     Draggable,
     TodoTaskList,
@@ -60,6 +67,7 @@ export default {
       date: new Date(),
       addTaskFormOpened: false,
       openTaskItemId: null,
+      calendarOpened: false,
     };
   },
 
@@ -76,6 +84,10 @@ export default {
   },
 
   methods: {
+    toggleFilter() {
+      this.calendarOpened = !this.calendarOpened;
+    },
+
     addTask(task) {
       this.taskList.push(task);
       API.setTasks(this.taskList);
@@ -151,7 +163,7 @@ export default {
 :root {
   --font: 16px Arial, Helvetica, sans-serif;
   --primary-color: #dc4700;
-  --light-color: #ebebeb;
+  --light-color: #f5f5f5;
 }
 
 * {
@@ -181,7 +193,7 @@ button {
 
 #app {
   display: grid;
-  gap: 30px;
+  gap: 40px;
 }
 
 .task-list {

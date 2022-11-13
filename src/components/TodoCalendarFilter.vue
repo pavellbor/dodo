@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="opened"
     ref="calendarFilter"
     class="calendar-filter"
   >
@@ -25,6 +26,10 @@ export default {
       type: Date,
       required: true,
     },
+    opened: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   emits: {
@@ -37,12 +42,20 @@ export default {
     };
   },
 
-  created() {
-    this.getCalendarList();
+  watch: {
+    opened(newValue) {
+      if (!newValue) {
+        return;
+      }
+
+      this.$nextTick(() => {
+        this.$refs.calendarFilter.scrollLeft = this.$refs.calendarFilter.scrollWidth;
+      });
+    },
   },
 
-  mounted() {
-    this.$refs.calendarFilter.scrollLeft = this.$refs.calendarFilter.scrollWidth;
+  created() {
+    this.getCalendarList();
   },
 
   methods: {
@@ -87,10 +100,21 @@ export default {
   padding-left: 10px;
   padding-right: 10px;
   overflow: auto;
+  animation: fade 0.5s ease-in-out;
 
   &::-webkit-scrollbar {
     width: 0;
     height: 0;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
 
@@ -101,7 +125,6 @@ export default {
   gap: 10px;
   width: 60px;
   padding: 15px 10px;
-  color: var(--light-color);
   border: 1px solid var(--light-color);
   border-radius: 8px;
   transition: color 0.25s ease-in-out;

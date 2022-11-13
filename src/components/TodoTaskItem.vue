@@ -148,17 +148,17 @@ export default {
 .task-item {
   display: grid;
   gap: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   padding: 15px 20px;
   background: #ffffff;
   border: 1px solid var(--light-color);
   border-radius: 8px;
+  animation: fade 0.5s ease-in-out;
 }
 
 .task-item__main-content {
   display: grid;
   grid-template-columns: auto 1fr;
-  align-items: start;
   gap: 20px;
 }
 
@@ -169,7 +169,8 @@ export default {
 }
 
 .task-item__name {
-  margin-top: 4px;
+  align-self: center;
+  font-size: 18px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -177,7 +178,7 @@ export default {
 
 .task-item__desc {
   opacity: 0.5;
-  font-size: 12px;
+  font-size: 14px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -208,13 +209,12 @@ export default {
   height: 28px;
   font-size: 24px;
   color: var(--primary-color);
-  border: 1px solid var(--light-color);
+  border: 2px solid var(--light-color);
   border-radius: 8px;
   transition: border-color 0.25s ease-in-out;
 
   &--active {
     border-color: var(--primary-color);
-    border-width: 2px;
   }
 }
 
